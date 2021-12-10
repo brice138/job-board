@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head'); %>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header><%- include('../partials/sidebar'); %></header>
+      <div class="hidden-form">
+        <form onsubmit="onSubmitHandler(event)">
+          <h2>ADD A NEW ADVERTISEMENT</h2>
+          <div class="separation"></div>
+          <br /><br />
+          <div class="groupe">
+            <label for="title">Advertised job title</label>
+            <i class="fas fa-ad"></i>
+            <input type="text" name="title" />
+          </div>
+          <div class="groupe">
+            <label for="salary">Salary</label>
+            <i class="fas fa-money-check-alt"></i>
+            <input type="text" name="salary" />
+          </div>
+          <div class="groupe">
+            <label for="location">Location</label>
+            <i class="fas fa-location-arrow"></i>
+            <input type="text" name="location" />
+          </div>
+          <div class="groupe">
+            <label for="contractType">Contract Type</label>
+            <i class="fas fa-file-contract"></i>
+            <input type="text" name="contractType" />
+          </div>
+          <div class="groupe">
+            <label for="description">description</label>
+            <i class="fas fa-file-alt"></i>
+            <textarea name="description"></textarea>
+          </div>
+          <div class="groupe">
+            <label for="isVisible">Visible to candidates ?</label>
+            <input type="checkbox" name="isVisible" />
+          </div>
+          <div class="pied-formulaire" align="center">
+            <button type="submit">Submit</button>
+            <br /><br />
+            <a href="/">Back to home page</a>
+          </div>
+        </form>
+      </div>
+      <script src="/js/offers/create.js"></script>
+    </div>
+  </body>
+</html>

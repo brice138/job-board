@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+
+  <title>Administrator</title>
+</head>
+
+<body background="/images/background_pro.jpg">
+  <!------------------------------WRAPPER START----------------------------------->
+  <div class="wrapper">
+    <header>
+      <%- include('../partials/sidebar'); %>
+    </header>
+
+    <div class="separation"></div>
+    <div id="adminTables">
+      <h1>ADMINISTRATOR</h1>
+      <div class="separation"></div>
+      <div>
+        <br /><br />
+        <h2><b>User's list</b></h2>
+        <button type='button' id="addPerson" onclick="showFormAddPerson()">Add new person</button>
+        <table id='peopleTable' class="tableau-style">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Name</th>
+              <th>First Name</th>
+              <th>address</th>
+              <th>Postal Code</th>
+              <th>Birth Date</th>
+              <th>CV</th>
+              <th>Website</th>
+              <th>Picture</th>
+              <th>Gender</th>
+              <th>Edit</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i=0; i<peopleRows.length; i++) { %>
+            <tr id="peopleRow<%=i%>">
+              <td>
+                <%=peopleRows[i].id%>
+              </td>
+              <td class="peopleEmail">
+                <%=peopleRows[i].email%>
+              </td>
+              <td class="peoplePhone">
+                <%=peopleRows[i].phone%>
+              </td>
+              <td class="peopleName">
+                <%=peopleRows[i].name%>
+              </td>
+              <td class="peopleFirstName">
+                <%=peopleRows[i].first_name%>
+              </td>
+              <td class="peopleAdress">
+                <%=peopleRows[i].address%>
+              </td>
+              <td class="peoplePostalCode">
+                <%=peopleRows[i].postal_code%>
+              </td>
+              <% if (peopleRows[i].birth_date) { %>
+              <td class="peopleBirthDate">
+                <%=new Date(peopleRows[i].birth_date.getTime() + (24*60*60*1000)).toISOString().split('T')[0]%>
+              </td>
+              <% } else { %>
+              <td class="peopleBirthDate"></td>
+              <% } %>
+              <td class="peopleCv">
+                <%=peopleRows[i].cv%>
+              </td>
+              <td class="peopleWebsite">
+                <%=peopleRows[i].website%>
+              </td>
+              <td class="peoplePicture">
+                <%=peopleRows[i].picture%>
+              </td>
+              <td class="peopleGender">
+                <%=peopleRows[i].gender%>
+              </td>
+              <td><i class="fas fa-pen-square" onclick="showFormUpdatePerson('<%=peopleRows[i].id%>', '<%=i%>')"></i></td>
+              <td><i class="fas fa-trash" onclick="deleteUser('<%=peopleRows[i].id%>')"></i></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="separation"></div>
+      <div>
+        <br /><br />
+        <h2><b>Company list</b></h2>
+        <button type='button' onclick="showFormAddCompany()" id="addCompany">New company</button>
+        <table id='companiesTable' class="tableau-style">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Name</th>
+              <th>Activities</th>
+              <th>City</th>
+              <th>Postal Code</th>
+              <th>Number of employees</th>
+              <th>Contact Name</th>
+              <th>Website</th>
+              <th>Siret</th>
+              <th>Edit</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i=0; i<companiesRows.length; i++) { %>
+            <tr id="companiesRow<%=i%>">
+              <td>
+                <%=companiesRows[i].id%>
+              </td>
+              <td>
+                <%=companiesRows[i].email%>
+              </td>
+              <td>
+                <%=companiesRows[i].phone%>
+              </td>
+              <td>
+                <%=companiesRows[i].name%>
+              </td>
+              <td>
+                <%=companiesRows[i].activities%>
+              </td>
+              <td>
+                <%=companiesRows[i].city%>
+              </td>
+              <td>
+                <%=companiesRows[i].postal_code%>
+              </td>
+              <td>
+                <%=companiesRows[i].number_employees%>
+              </td>
+              <td>
+                <%=companiesRows[i].contact_name%>
+              </td>
+              <td>
+                <%=companiesRows[i].website%>
+              </td>
+              <td>
+                <%=companiesRows[i].siret%>
+              </td>
+              <td><i class="fas fa-pen-square" onclick="showFormUpdateCompany('<%=companiesRows[i].id%>', '<%=i%>')"></i></td>
+              <td><i class="fas fa-trash" onclick="deleteCompany('<%=companiesRows[i].id%>')"></i></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="separation"></div>
+      <div>
+        <br /><br />
+        <h2><b>Advertisement list</b></h2>
+        <button type='button' onclick="showFormAddAdvertisement()" id="addAdvertisement">New advertisement</button>
+        <table id='advertisementsTable' class="tableau-style">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>description</th>
+              <th>Date</th>
+              <th>Published</th>
+              <th>Company</th>
+              <th>Contract Type</th>
+              <th>Salary</th>
+              <th>Location</th>
+              <th>Edit</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i=0; i<advertisementsRows.length; i++) { %>
+            <tr id="advertisementsRow<%=i%>">
+              <td>
+                <%=advertisementsRows[i].id%>
+              </td>
+              <td>
+                <%=advertisementsRows[i].title%>
+              </td>
+              <td>
+                <%=advertisementsRows[i].description%>
+              </td>
+              <% if (advertisementsRows[i].date) { %>
+              <td>
+                <%=new Date(advertisementsRows[i].date.getTime() + (24*60*60*1000)).toISOString().split('T')%>
+              </td>
+              <% } else { %>
+              <td></td>
+              <% } %>
+              <td>
+                <%=advertisementsRows[i].published%>
+              </td>
+              <td>
+                <%=advertisementsRows[i].company_id%>
+              </td>
+              <td>
+                <%=advertisementsRows[i].contract_type%>
+              </td>
+              <td>
+                <%=advertisementsRows[i].salary%>
+              </td>
+              <td>
+                <%=advertisementsRows[i].location%>
+              </td>
+              <td><i class="fas fa-pen-square" onclick="showFormUpdateAdvertisement('<%=advertisementsRows[i].id%>', '<%=i%>')"></i></td>
+              <td><i class="fas fa-trash" onclick="deleteAdvertisement('<%=advertisementsRows[i].id%>')"></i>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="separation"></div>
+      <div>
+        <br /><br />
+        <h2><b>Application list</b></h2>
+        <table id='appliedTable' class="tableau-style">
+          <button id="addApplication" type='button' onclick="showFormAddApplication()">Add new application</button>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Advertisement</th>
+              <th>Person</th>
+              <th>message</th>
+              <th>Date</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i=0; i<appliedRows.length; i++) { %>
+            <tr id="appliedRow<%=i%>">
+              <td>
+                <%=appliedRows[i].id%>
+              </td>
+              <td>
+                <%=appliedRows[i].advertisement_id%>
+              </td>
+              <td>
+                <%=appliedRows[i].people_id%>
+              </td>
+              <td>
+                <%=appliedRows[i].message%>
+              </td>
+              <% if (appliedRows[i].date) { %>
+              <td>
+                <%=new Date(appliedRows[i].date.getTime() + (24*60*60*1000)).toISOString().split('T')%>
+              </td>
+              <% } else { %>
+              <td></td>
+              <% } %>
+              <td><i class="fas fa-pen-square" onclick="showFormUpdateApplication('<%=appliedRows[i].id%>', '<%=i%>')"></i></td>
+              <td><i class="fas fa-trash" onclick="deleteApplication('<%=appliedRows[i].id%>')"></i></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div id="peopleModal">
+        <form id="peopleForm">
+          <h2><b>ACCOUNT INFORMATION</b></h2>
+          <div class="separation"></div>
+          <div class="corps-formulaire">
+            <div class="gauche">
+              <div class="groupe">
+                <label for="email">email</label>
+                <input type="email" name="email" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="birthDate">Birth Date</label>
+                <input type="date" name="birthDate" />
+                <i class="fas fa-birthday-cake"></i>
+              </div>
+              <div class="groupe">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" />
+                <i class="fas fa-phone-square-alt"></i>
+              </div>
+              <div class="inputFile">
+                <label for="cv">CV</label>
+                <br />
+                <input type="file" name="cv" id="cv" />
+              </div>
+            </div>
+            <div class="droite">
+              <div class="groupe">
+                <label for="password">Password</label>
+                <input type="password" name="password" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="address">Address</label>
+                <input type="text" name="address" />
+                <i class="fas fa-location-arrow"></i>
+              </div>
+              <div class="groupe">
+                <label for="postalCode">Postal code</label>
+                <input type="text" name="postalCode" />
+                <i class="fas fa-list-ol"></i>
+              </div>
+              <div class="groupe">
+                <label for="website">Website</label>
+                <input type="text" name="website" />
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <br />
+              <div class="groupe">
+                <label for="gender">Gender</label>
+                <select name="gender">
+                  --Please choose an option--
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other/Undisclosed</option>
+                </select>
+              </div>
+              <div class="inputFile">
+                <label for="picture">Picture</label>
+                <input type="file" name="picture" id="profilePicture" />
+              </div>
+            </div>
+          </div>
+          <div class="pied-formulaire" align="center">
+            <button type="submit">Submit changes</button>
+            <br /><br />
+            <a href="/admin">Back to admin page</a>
+          </div>
+        </form>
+      </div>
+      <div id="companiesModal">
+        <form id="companiesForm">
+          <h2><b>COMPANY INFORMATION</b></h2>
+          <div class="separation"></div>
+          <div class="corps-formulaire">
+            <div class="gauche">
+              <div class="groupe">
+                <label for="email">email</label>
+                <input type="email" name="email" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="companyName">Company Name</label>
+                <input type="text" name="companyName" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="city">City</label>
+                <input type="text" name="city" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" />
+                <i class="fas fa-phone-square-alt"></i>
+              </div>
+              <div class="groupe">
+                <label for="activities">Activities</label>
+                <input type="text" name="activities" />
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+            <div class="droite">
+              <div class="groupe">
+                <label for="password">Password</label>
+                <input type="password" name="password" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="numberEmployees">Number of employees</label>
+                <input type="number" name="numberEmployees" />
+                <i class="fas fa-location-arrow"></i>
+              </div>
+              <div class="groupe">
+                <label for="siret">SIRET</label>
+                <input type="text" name="siret" />
+                <i class="fas fa-location-arrow"></i>
+              </div>
+              <div class="groupe">
+                <label for="postalCode">Postal code</label>
+                <input type="text" name="postalCode" />
+                <i class="fas fa-list-ol"></i>
+              </div>
+              <div class="groupe">
+                <label for="website">Website</label>
+                <input type="text" name="website" />
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <div class="groupe">
+                <label for="contactName">Contact Name</label>
+                <input type="text" name="contactName" />
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <br />
+            </div>
+          </div>
+          <div class="pied-formulaire" align="center">
+            <button type="submit">Submit changes</button>
+            <br /><br />
+            <a href="/admin">Back to admin page</a>
+          </div>
+        </form>
+      </div>
+      <div id="advertisementsModal">
+        <form id="advertisementsForm">
+          <h2>ADVERTISEMENT'S INFORMATION</h2>
+          <div class="separation"></div>
+          <br /><br />
+          <div class="corps-formulaire">
+            <div class="gauche">
+              <div class="groupe">
+                <label for="title">Company ID</label>
+                <i class="fas fa-ad"></i>
+                <input type="number" name="companyId" />
+              </div>
+              <div class="groupe">
+                <label for="title">Advertised job title</label>
+                <i class="fas fa-ad"></i>
+                <input type="text" name="title" />
+              </div>
+              <div class="groupe">
+                <label for="salary">Salary</label>
+                <i class="fas fa-money-check-alt"></i>
+                <input type="text" name="salary" />
+              </div>
+              <div class="groupe">
+                <label for="location">Location</label>
+                <i class="fas fa-location-arrow"></i>
+                <input type="text" name="location" />
+              </div>
+            </div>
+            <div class="droite">
+              <div class="groupe">
+                <label for="contractType">Contract Type</label>
+                <i class="fas fa-file-contract"></i>
+                <input type="text" name="contractType" />
+              </div>
+              <div class="groupe">
+                <label for="description">description</label>
+                <i class="fas fa-file-alt"></i>
+                <textarea name="description"></textarea>
+              </div>
+              <div class="groupe">
+                <label for="isVisible">Visible to candidates ?</label>
+                <input type="checkbox" name="isVisible" />
+              </div>
+            </div>
+          </div>
+          <div class="pied-formulaire" align="center">
+            <button type="submit">Submit changes</button>
+            <br /><br />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="appliedModal">
+      <form id="appliedForm">
+        <h2><b>APPLICATION INFORMATION</b></h2>
+        <div class="separation"></div>
+        <br /><br />
+        <div class="corps-formulaire">
+          <div class="gauche">
+            <div class="groupe">
+              <label for="advertisementId">Advertisement ID</label>
+              <i class="fas fa-ad"></i>
+              <input type="number" name="advertisementId" />
+            </div>
+            <div class="groupe">
+              <label for="personId">Person ID</label>
+              <i class="fas fa-ad"></i>
+              <input type="number" name="personId" />
+            </div>
+            <div class="groupe">
+              <label for="message">description</label>
+            <i class="fas fa-file-alt"></i>
+            <textarea name="message"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="pied-formulaire" align="center">
+          <button type="submit">Submit changes</button>
+          <br /><br />
+          <a href="/admin">Back to admin page</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <a href="/">Back to home page</a>
+
+  <script src="/js/admin/main.js"></script>
+</body>
+
+</html>

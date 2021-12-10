@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../partials/head'); %>
+  <title>Mon super board</title>
+</head>
+
+
+
+<body>
+  <div class="wrapper">
+    <header><%- include('../partials/sidebar'); %></header>
+    <div class="main-container" id="myApplications">
+      <div class="heading">
+        <h1 class="heading__title">APPLICANTS</h1>
+      </div>
+      <div class="cards">
+        <% for (let i=0; i<rows.length; i++) {%>
+          <div class="card card-1" id="card<%=i%>">
+            <div>
+          <div class="card__icon"><i class="fas fa-bolt"></i></div>
+            </div>
+          <h2 class="card__title"><b>Name: <%=rows[i].first_name%> <%=rows[i].name%></b></h2>
+          <br/>
+          <% if (rows[i].picture) { %>
+          <img src="<%=rows[i].picture%>" id="profilePicture">
+          <% } else { %>
+            <img src="/images/default_pfp.jpg" id="profilePicture">
+            <% } %>
+          <p>Email: <%=rows[i].email%></p>
+          <p>Phone:<%=rows[i].phone%></p>
+          <p>Address: <%=rows[i].address%> <%=rows[i].postal_code%></p>
+          <p>Birth Date: <%=rows[i].birth_date%></p>
+          <p><a href="<%=rows[i].cv%>"></a></p>
+          <% if (rows[i].website) { %>
+          <p>Website: <a href="<%=rows[i].website%>">Website</a></p>
+          <% } %>
+          <p>Gender: <%=rows[i].gender%></p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

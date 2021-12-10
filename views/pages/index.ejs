@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+
+    <title>Job board !</title>
+  </head>
+
+  <body background="/images/background_pro.jpg">
+    <div class="wrapper">
+      <header><%- include('../partials/sidebar'); %></header>
+      <!---------------------------MAIN CONTAINER START----------------------------------->
+      <div class="main-container">
+        <!-----------------FIRST JOB OFFER----------------------------------->
+        <div class="zoom">
+          <% for(let i=0; i < rows.length; i++) { %>
+          <div class="container">
+            <div class="container-logo">
+              <img src="images/android.png" width="88" height="88" />
+            </div>
+
+            <div class="sub-container">
+              <div class="sub-sub-container1">
+                <ul class="first-list">
+                  <li><%= rows[i].name%></li>
+                  <li>New !</li>
+                  <li>
+                    <a href="/applications/create/<%=rows[i].id%>"
+                      ><button id="apply">Apply</button></a
+                    >
+                  </li>
+                </ul>
+
+                <ul>
+                  <li><%= rows[i].title%></li>
+                </ul>
+
+                <ul class="third-list">
+                  <li><%= rows[i].date%></li>
+                  <li><br /><%= rows[i].contract_type%></li>
+                  <li><br /><%= rows[i].location%></li>
+                </ul>
+              </div>
+              <div class="sub-sub-container2">
+                <ul class="sub-2-list">
+                  <li>Android</li>
+                  <li>Developper</li>
+                  <li>HTML</li>
+                  <li>Javascript</li>
+                  <li>CSS</li>
+                </ul>
+
+                <!------------------------- START BUTTON "LEARN MORE" FOR DESCRIPTION----------------------------->
+                <button
+                  class="togg1"
+                  onclick="onClickHandler('<%=i%>','<%=rows[i].id%>')"
+                >
+                  Learn more
+                </button>
+                <div class="description description<%=i%>"></div>
+                <!------------------------END BUTTON "LEARN MORE" FOR DESCRIPTION----------------------------->
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!------------START DISPLAY PAGINATION--------->
+
+    <script src="/js/dashboard/main.js"></script>
+  </body>
+</html>

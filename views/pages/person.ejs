@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../partials/head'); %>
+  <title>My account</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header><%- include('../partials/sidebar'); %></header>
+    <div class="formWrapper">
+      <form onsubmit="onSubmitHandler(event)" id="userAccountForm">
+        <h2>ACCOUNT INFORMATION</h2>
+        <div class="separation"></div>
+        <div class="corps-formulaire">
+          <div class="gauche">
+            <div class="groupe">
+              <label for="firstName">First Name</label>
+              <input type="text" name="firstName" value="<%=result[0].first_name%>" />
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="groupe">
+              <label for="lastName">Last Name</label>
+              <input type="text" name="lastName" value="<%=result[0].name%>" />
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="groupe">
+              <label for="birthDate">Birth Date</label>
+              <%if (result[0].birth_date) { %>
+              <input type="date" name="birthDate" value="<%=new Date(result[0].birth_date.getTime() + (24*60*60*1000)).toISOString().split('T')[0]%>" />
+              <%} else {%>
+              <input type="date" name="birthDate" />
+              <% } %>
+              <i class="fas fa-birthday-cake"></i>
+            </div>
+            <div class="groupe">
+              <label for="phone">Phone</label>
+              <input type="tel" name="phone" value="<%=result[0].phone%>" />
+              <i class="fas fa-phone-square-alt"></i>
+            </div>
+            <div class="inputFile">
+              <label for="cv">CV</label>
+              <br />
+              <input type="file" name="cv" id="cv" />
+              <button type="button" onclick="uploadCV(event)">
+                Upload CV
+              </button>
+            </div>
+            <div class="inputFile">
+              <label for="picture">Picture</label>
+              <br />
+              <input type="file" name="picture" id="profilePicture" />
+              <button type="button" onclick="uploadPicture(event)">
+                Upload picture
+              </button>
+            </div>
+          </div>
+          <div class="droite">
+            <div class="groupe">
+              <label for="password">Password</label>
+              <input type="password" name="password" placeholder="Empty to keep current password"/>
+              <i class="fas fa-location-arrow"></i>
+            </div>
+            <div class="groupe">
+              <label for="address">Address</label>
+              <input type="text" name="address" value="<%=result[0].address%>" />
+              <i class="fas fa-location-arrow"></i>
+            </div>
+            <div class="groupe">
+              <label for="postalCode">Postal code</label>
+              <input type="text" name="postalCode" value="<%=result[0].postal_code%>" />
+              <i class="fas fa-list-ol"></i>
+            </div>
+            <div class="groupe">
+              <label for="website">Website</label>
+              <input type="text" name="website" value="<%=result[0].website%>" />
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <br />
+            <div class="groupe">
+              <label for="gender">Gender</label>
+              <select name="gender">
+                <option value="" disabled>
+                  --Please choose an option--
+                </option>
+                <option value="male" <%if (result[0].gender == 'male') { %> <%=selected='selected'%> <% } %>>
+                  Male
+                </option>
+                <option value="female" <%if (result[0].gender == 'female') { %> <%=selected='selected'%> <% } %>>
+                  Female</option>
+                <option value="other" <% if (result[0].gender == 'other') { %> <%=selected='selected'%> <% } %>>
+                  Other/Undisclosed
+                </option>
+              </select>
+            </div>
+            
+          </div>
+        </div>
+        <div class="pied-formulaire" align="center">
+          <button type="submit">Submit changes</button>
+          <br /><br />
+          <a href="/">Back to home page</a>
+        </div>
+      </form>
+      <div class="infoDisplay">
+        <button onclick="onClickHandler()" id="edit">Edit</button>
+        <h2>USER'S PROFILE</h2>
+        <div class="separation"></div>
+        <div class="gauche">
+          <div class="groupe">
+            <% if (result[0].picture) { %>
+            <img src="<%=result[0].picture%>" alt="pfp" id="profilePicture" />
+            <% } else { %>
+            <img src="/images/default_pfp.jpg" alt="pfp" id="profilePicture" />
+            <% } %>
+          </div>
+          <div class="groupe">
+            <p>First Name: <%=result[0].first_name%></p>
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="groupe">
+            <p>Last Name: <%=result[0].name%></p>
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="groupe">
+            <% if (result[0].birth_date) { %>
+            <p>
+              Birth Date: <%=new Date(result[0].birth_date.getTime() +
+                (24*60*60*1000)).toISOString().split('T')[0]%>
+            </p>
+            <% } else { %>
+            <p>Birth Date:%></p>
+            <% } %>
+            <i class="fas fa-birthday-cake"></i>
+          </div>
+          <div class="groupe">
+            <p>Phone: <%=result[0].phone%></p>
+            <i class="fas fa-phone-square-alt"></i>
+          </div>
+          <div class="group">
+            <% if (result[0].cv) { %>
+            <p>CV: <a href="<%=result[0].cv%>" download> Download CV</a></p>
+            <% } else { %>
+            <p>CV: none uploaded</p>
+            <% } %>
+          </div>
+        </div>
+        <div class="droite">
+          <div class="groupe">
+            <p>Address: <%=result[0].address%></p>
+            <i class="fas fa-location-arrow"></i>
+          </div>
+          <div class="groupe">
+            <p>Postal code: <%=result[0].postal_code%></p>
+            <i class="fas fa-list-ol"></i>
+          </div>
+          <div class="groupe">
+            <p>Website: <%=result[0].website%></p>
+            <i class="fas fa-sitemap"></i>
+          </div>
+          <div class="groupe">
+            <p>Gender: <%=result[0].gender%></p>
+            <i class="fas fa-venus-mars"></i>
+          </div>
+        </div>
+        <button type="button" onclick="deleteHandler()" id="deleteAccount">
+          Delete my account
+        </button>
+      </div>
+      <script src="/js/users/person.js"></script>
+    </div>
+  </div>
+</body>
+
+</html>

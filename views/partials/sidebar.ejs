@@ -1,0 +1,88 @@
+<!------------------------------WRAPPER START----------------------------------->
+
+<!------------------------------HEADER START----------------------------------->
+<div class="header">
+  <!------------------------------HEADER MENU START----------------------------------->
+  <div class="header-menu">
+    <!------------------------------TITLE "JOBBOARD"----------------------------------->
+    <div class="title">JOB <span>BOARD</span></div>
+    <!------------------------------SIDEBAR BUTTON START----------------------------------->
+    <!--<div class="sidebar-btn">
+              <i class="fas fa-bars"></i>
+            </div>-->
+    <!------------------------------SIDEBAR BUTTON END----------------------------------->
+
+    <!------------------------------HEADER NAVIGATION START----------------------------------->
+    <ul>
+      <li>
+        <a href="/users/logout"><i class="fas fa-power-off"></i></a>
+      </li>
+      <li>
+        <a href=""><i class="fas fa-user-lock"></i></a>
+      </li>
+      <li>
+        <a href=""><i class="fas fa-envelope-open-text"></i></a>
+      </li>
+    </ul>
+  </div>
+  <!------------------------------HEADER MENU END----------------------------------->
+</div>
+<!------------------------------HEADER END----------------------------------->
+
+<!------------------------------SIDEBAR START----------------------------------->
+<div class="sidebar">
+  <!------------------------------SIDEBAR MENU START----------------------------------->
+  <div class="sidebar-menu">
+    <div class="item">
+      <a href="/" class="menu-btn">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+    </div>
+    <div class="item" id="profile">
+      <a href="#profile" class="menu-btn">
+        <i class="fas fa-user-circle"></i
+        ><span>Profile <i class="fas fa-chevron-down drop-down"></i></span>
+      </a>
+      <div class="sub-menu">
+        <% if (variant === 'unlogged' || variant === 'admin') { %>
+        <a href="/users/register"
+          ><i class="fas fa-image"></i><span>Register</span></a
+        >
+        <a href="/users/login"
+          ><i class="fas fa-address-card"></i><span>Log in</span></a
+        >
+        <% } %> <% if (variant === 'person' || variant === 'admin') { %>
+        <a href="/users/person"
+          ><i class="fas fa-image"></i><span>User</span></a
+        >
+        <a href="/applications"
+          ><i class="fas fa-address-card"></i><span>My applications</span></a
+        >
+        <% } %> <% if (variant === 'company' || variant === 'admin') { %>
+        <a href="/users/company"
+          ><i class="fas fa-address-card"></i><span>Company</span></a
+        >
+        <a href="/offers"
+          ><i class="fas fa-address-card"></i><span>My advertisements</span></a
+        >
+        <% } %>
+      </div>
+    </div>
+    <% if (variant === 'admin') { %>
+    <div class="item" id="admin">
+      <a href="/admin" class="menu-btn">
+        <i class="fas fa-user-lock"></i>
+        <span>Admin <i class="fas fa-chevron-down drop-down"></i></span>
+      </a>
+    </div>
+    <% } %>
+    <div class="item">
+      <a href="#" class="menu-btn">
+        <i class="fas fa-info-circle"></i><span>About</span>
+      </a>
+    </div>
+  </div>
+  <!------------------------------SIDEBAR MENU END----------------------------------->
+</div>
+<!------------------------------SIDEBAR END----------------------------------->

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+
+    <title>Job board !</title>
+  </head>
+
+  <body background="/images/background_pro.jpg">
+    <!------------------------------WRAPPER START----------------------------------->
+    <div class="wrapper">
+      <header><%- include('../partials/sidebar'); %></header>
+
+      <form onsubmit="onSubmitHandler(event)" id="login-register-form">
+        <h2>STANDARD CONNEXION</h2>
+        <div class="separation"></div>
+        <br /><br />
+        <% if (!isLoginPage) {%>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" id="btn-candidate" class="btn btn-primary" onclick="accountType='candidate'">Candidate</button>
+          <button type="button" id="btn-company" class="btn btn-primary" onclick="accountType='company'">
+            Company
+          </button>
+        </div>
+        <br /><br />
+        <% } %>
+        <p class="enter email">Enter your email address :</p>
+
+        <div class="inputs">
+          <input type="email" placeholder="Email" name="email" /><br /><br />
+          <input type="password" placeholder="Password" name="password"/>
+        </div>
+        <% if (isLoginPage) {%>
+        <div>
+          <p>
+            Not a member yet ? 
+            <br /><br />
+            Click <a href="/users/register">HERE</a> to
+            sign-up !
+          </p>
+        </div>
+        <% } %>
+        <br />
+        <div class="pied-formulaire" align="center">
+          <button type="submit"><%=submitValue%></button>
+      <br /><br />
+      <a href="/">Back to home page</a>
+    </div>
+        </div>
+      </form>
+    <script src="/js/users/<%=script%>.js"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+
+    <title>Job board !</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header><%- include('../partials/sidebar'), %></header>
+      <div class="main-container" id="myApplications">
+        <div class="heading">
+          <h1 class="heading__title">MY APPLICATIONS</h1>
+        </div>
+        <div class="cards">
+          <% for (let i=0; i<rows.length; i++) { %>
+            <div class="card card-1" id="card<%=i%>">
+              <div class="card__icon"><i class="fas fa-bolt"></i></div>
+              <a href="/applications/update/<%=rows[i].id%>"><button type='button'>Edit</button></a>
+              <h2><b><%=rows[i].name%></b></h2>
+              <p class="card__exit"><i class="fas fa-times" onclick="deleteHandler('<%=rows[i].id%>', '<%=i%>')"></i></p>
+              <h2 class="card__title">
+                <%=rows[i].title%>
+              </h2>
+              <p><%=rows[i].description%></p>
+              <p><%=rows[i].location%></p>
+              <p><%=rows[i].salary%></p>
+              <p><%=rows[i].contract_type%></p>
+              <p>Advertisement created on : <%=rows[i].advertisement_date%></p>
+              <h3>Application details</h3>
+              <p>Applied on: <%=rows[i].application_date%></p>
+              <p>Message: <%=rows[i].message%></p>
+            </div>
+          <% } %>
+        </div>
+        <form id='userAccountForm'>coincoin</form>
+      </div>
+    </div>
+    <script src='js/applications/applications.js'></script>
+  </body>
+</html>

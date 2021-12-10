@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head'); %>
+    <title>My company</title>
+  </head>
+
+  <body background="/images/background_pro.jpg">
+    <!------------------------------WRAPPER START----------------------------------->
+    <div class="wrapper">
+      <header><%- include('../partials/sidebar'); %></header>
+      <div class="formWrapper">
+        <form onsubmit="onSubmitHandler(event)" id="userAccountForm">
+          <h2>COMPANY'S ACCOUNT INFORMATION</h2>
+          <div class="separation"></div>
+          <div class="corps-formulaire">
+            <div class="gauche">
+              <div class="groupe">
+                <label for="companyName">Company Name</label>
+                <input
+                  type="text"
+                  name="companyName"
+                  value="<%=result[0].name%>"
+                />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="city">City</label>
+                <input type="text" name="city" value="<%=result[0].city%>" />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" value="<%=result[0].phone%>" />
+                <i class="fas fa-phone-square-alt"></i>
+              </div>
+              <div class="groupe">
+                <label for="activities">Activities</label>
+                <input
+                  type="text"
+                  name="activities"
+                  value="<%=result[0].activities%>"
+                />
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="groupe">
+                <label for="numberEmployees">Number of employees</label>
+                <input
+                  type="number"
+                  name="numberEmployees"
+                  value="<%=result[0].number_employees%>"
+                />
+                <i class="fas fa-location-arrow"></i>
+              </div>
+            </div>
+            <div class="droite">
+              <div class="groupe">
+                <label for="numberEmployees">Password</label>
+                <input type="password" name="password" />
+                <i class="fas fa-location-arrow"></i>
+              </div>
+              <div class="groupe">
+                <label for="siret">SIRET</label>
+                <input type="text" name="siret" value="<%=result[0].siret%>" />
+                <i class="fas fa-location-arrow"></i>
+              </div>
+              <div class="groupe">
+                <label for="postalCode">Postal code</label>
+                <input
+                  type="text"
+                  name="postalCode"
+                  value="<%=result[0].postal_code%>"
+                />
+                <i class="fas fa-list-ol"></i>
+              </div>
+              <div class="groupe">
+                <label for="website">Website</label>
+                <input
+                  type="text"
+                  name="website"
+                  value="<%=result[0].website%>"
+                />
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <div class="groupe">
+                <label for="contactName">Contact Name</label>
+                <input
+                  type="text"
+                  name="contactName"
+                  value="<%=result[0].contact_name%>"
+                />
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <br />
+            </div>
+          </div>
+          <div class="pied-formulaire" align="center">
+            <button type="submit">Submit changes</button>
+            <br /><br />
+            <a href="/">Back to home page</a>
+          </div>
+        </form>
+        <div class="infoDisplay">
+          <button onclick="onClickHandler()" id="edit">Edit</button>
+          <h2>COMPANY'S PROFILE</h2>
+          <div class="separation"></div>
+          <br /><br />
+          <div class="gauche">
+            <div class="groupe">
+              <p>Company Name: <%=result[0].name%></p>
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="groupe">
+              <p>Email: <%=result[0].email%></p>
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="groupe">
+              <p>City: <%=result[0].city%></p>
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="groupe">
+              <p>Phone: <%=result[0].phone%></p>
+              <i class="fas fa-phone-square-alt"></i>
+            </div>
+            <div class="groupe">
+              <p>Activities: <%=result[0].activities%></p>
+              <i class="fas fa-phone-square-alt"></i>
+            </div>
+          </div>
+          <div class="droite">
+            <div class="groupe">
+              <p>SIRET: <%=result[0].siret%></p>
+              <i class="fas fa-location-arrow"></i>
+            </div>
+            <div class="groupe">
+              <p>Number of employees: <%=result[0].number_employees%></p>
+              <i class="fas fa-location-arrow"></i>
+            </div>
+            <div class="groupe">
+              <p>Postal code: <%=result[0].postal_code%></p>
+              <i class="fas fa-list-ol"></i>
+            </div>
+            <% if (result[0].website) { %>
+            <div class="groupe">
+              <p>Website: <a href="<%=result[0].website%>">Website</a></p>
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <% } %>
+            <div class="groupe">
+              <p>Contact Name: <%=result[0].contact_name%></p>
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          <button id="deleteAccount" type="button" onclick="deleteHandler()">
+            Delete my account
+          </button>
+        </div>
+        <script src="/js/users/company.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../partials/head'); %>
+  <title>Mon super board</title>
+</head>
+
+
+
+<body background="/images/background_pro.jpg">
+  <div class="wrapper">
+    <header><%- include('../partials/sidebar'); %></header>
+    <div class="main-container" id="myApplications">
+      <div class="heading">
+        <h1 class="heading__title">MY ADVERTISEMENTS</h1>
+        <a href="/offers/create/"><button id="addNewOffer">New Ad</button></a>
+      </div>
+      <div class="cards">
+        <% for (let i=0; i<rows.length; i++) {%>
+          <div class="card card-1" id="card<%=i%>">
+            <a href="/offers/update/<%=rows[i].id%>"><button type='button'>Edit</button></a>
+            <div class="card__icon"><i class="fas fa-bolt"></i></div>
+          <h2>Description: <%=rows[i].description%></h2>
+          <h2 class="card__title"><b><%=rows[i].title%></b></h2>
+          <p>Location: <%=rows[i].location%></p>
+          <p>Salary:<%=rows[i].salary%></p>
+          <p>Contract type: <%=rows[i].contract_type%></p>
+          <% if (rows[i].published == 1) { %>
+          <p>Published: yes</p>
+          <%  } else { %>
+          <p>Published: no</p>
+          <% } %>
+          <a href='/offers/viewApplicants/<%=rows[i].id%>'>View Applicants</a>
+          <p class="card__exit"><i class="fas fa-times" onclick="deleteHandler('<%=rows[i].id%>', '<%=i%>')"></i></p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <script src='js/offers/offers.js'></script>
+</body>
+
+</html>
